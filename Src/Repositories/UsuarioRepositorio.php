@@ -14,7 +14,7 @@ class UsuarioRepositorio
 
     public function getTodosUsuarios(): array
     {
-        $sql = "SELECT * from usuarios";
+        $sql = "SELECT * FROM usuarios";
         $statement = $this->pdo->query($sql);
         $usuarios = $statement->fetchAll(PDO::FETCH_ASSOC);
 
