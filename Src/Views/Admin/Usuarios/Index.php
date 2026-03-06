@@ -1,20 +1,24 @@
+<?php
+
+require_once "Src/DB/Conexao.php";
+require_once "Src/Models/Usuario.php";
+require_once "Src/Repositories/UsuarioRepositorio.php";
+
+$dadosUsuario = new UsuarioRepositorio(pdo: $pdo);
+$usuarios = $dadosUsuario->getTodosUsuarios();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuários</title>
+    <title>Listagem de Usuários</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <header>
-        <div class="H-esquerdo">
-            <h2 style="cursor: pointer;"><a href="../Home/Index.php" style="text-decoration: none; color: white;">Início</a></h2>
-            <h2><a style="text-decoration: none; color:white;" href="../Perfil/Index.php">Perfil</a></h2>
-        </div>
-    </header>
     <div class="controle">
         <h1>Lista de usuarios</h1>
         <table class="lista-controle">
@@ -28,6 +32,15 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($usuarios as $usuario): ?>
+                    <tr>
+                        <td><?= $usuario->getId() ?></td>
+                        <td><?= $usuario->getNome() ?></td>
+                        <td><?= $usuario->getEmail() ?></td>
+                        <td><?= $usuario->getTelefone() ?></td>
+                        <td><?= $usuario->getPermissao() ?></td>
+                    </tr>
+                <?php endforeach  ?>
             </tbody>
         </table>
     </div>
