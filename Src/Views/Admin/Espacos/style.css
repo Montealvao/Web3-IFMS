@@ -1,0 +1,59 @@
+.tabela{
+    border:  0.1rem gray solid;
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.tabela thead{
+    background-color: #1E1E1E;
+}
+
+.tabela tbody{
+    background-color: #475569;
+    color: black;
+}
+
+.tabela th, .tabela td {
+    border: 0.1rem gray solid;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.tabela table{
+    border:  0.1rem #475569;
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+@media (max-width: 768px){
+    footer{
+        display: none;
+    }
+
+    .tabela table{
+        width: 80%;
+    }
+}
+
+@media (max-width: 425px){
+    .cadastroEspaco{
+        width: 60%;
+    }
+
+    td{
+        max-width: 8rem;
+        border: 0.1rem solid black;
+    }
+
+    
+    .tabela table{
+        width: 2%;
+    }
+    .tabela tbody{
+        font-size: 1rem;
+    }
+    
+}
