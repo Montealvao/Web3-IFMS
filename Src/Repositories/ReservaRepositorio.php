@@ -4,20 +4,23 @@ class ReservaRepositorio
 {
     private PDO $pdo;
 
+    /**
+     * @param PDO $pdo
+     */
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
     }
 
-    public function getTodasReservas()
+    public function getTodasReservas(): array
     {
         $sql = "SELECT * FROM reservas";
-        $statment = $this->pdo->query($sql);
-        $espacos = $statment->fetchAll(PDO::FETCH_ASSOC);
+        $statment = $this->pdo->query(query: $sql);
+        $espacos = $statment->fetchAll(mode: PDO::FETCH_ASSOC);
 
-        $dadosEspaco = array_map(function ($reserva) {
-            return $this->formarObjeto($reserva);
-        }, $espacos);
+        $dadosEspaco = array_map(callback: function ($reserva): object {
+            return $this->formarObjeto(dados: $reserva);
+        }, array: $espacos);
 
         return $dadosEspaco;
     }
@@ -25,10 +28,10 @@ class ReservaRepositorio
     private function formarObjeto($dados): object
     {
         return new Reserva(
-            $dados['id'],
-            $dados['id_usuario'],
-            $dados['id_espaco'],
-            $dados['data']
+            id: $dados['id'],
+            id_usuario: $dados['id_usuario'],
+            id_espaco: $dados['id_espaco'],
+            data: $dados['data']
         );
     }
 }

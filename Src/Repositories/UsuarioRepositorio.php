@@ -15,12 +15,12 @@ class UsuarioRepositorio
     public function getTodosUsuarios(): array
     {
         $sql = "SELECT * FROM usuarios";
-        $statement = $this->pdo->query($sql);
-        $usuarios = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement = $this->pdo->query(query: $sql);
+        $usuarios = $statement->fetchAll(mode: PDO::FETCH_ASSOC);
 
-        $dadosUsuario = array_map(function ($usuario) {
-            return $this->formarObjeto($usuario);
-        }, $usuarios);
+        $dadosUsuario = array_map(callback: function ($usuario): object {
+            return $this->formarObjeto(dados: $usuario);
+        }, array: $usuarios);
 
         return $dadosUsuario;
     }
@@ -28,13 +28,25 @@ class UsuarioRepositorio
     private function formarObjeto($dados): object
     {
         return new Usuario(
-            $dados['id'],
-            $dados['nome'],
-            $dados['email'],
-            $dados['senha'],
-            $dados['telefone'],
-            $dados['permissao']
+            id: $dados['id'],
+            nome: $dados['nome'],
+            email: $dados['email'],
+            senha: $dados['senha'],
+            telefone: $dados['telefone'],
+            permissao: $dados['permissao']
         );
     }
+
+    public function salvar(Usuario $usuario): void    
+    {
+        $sql = "INSERT INTO usuarios(nome, email, senha, telefone, permissao) VALUES(?,?,?,?,?)";
+        $statement = $this->pdo->prepare(query: $sql);
+        $statement->bindValue(param: 1, value: $usuario->getNome());
+        $statement->bindValue(param: 2, value: $usuario->getEmail());
+        $statement->bindValue(param: 3, value: $usuario->getSenha());
+        $statement->bindValue(param: 4, value: $usuario->getTelefone());
+        $statement->bindValue(param: 5, value: $usuario->getPermissao());
+        $statement->execute();
+    }
 }
-?>
+?>  

@@ -2,12 +2,12 @@
 
 class Espaco
 {
-    private int $id;
+    private ?int $id;
     private string $nome;
     private int $capacidade;
     private string $descricao;
 
-    public function __construct(int $id, string $nome, int $capacidade, string $descricao)
+    public function __construct(?int $id, string $nome, int $capacidade, string $descricao)
     {
         $this->id = $id;
         $this->nome = $nome;

@@ -2,12 +2,12 @@
 
 class Reserva
 {
-    private int $id;
+    private ?int $id;
     private int $id_usuario;
     private int $id_espaco;
     private DateTime $data;
 
-    public function __construct(int $id, int $id_usuario, int $id_espaco, DateTime $data)
+    public function __construct(?int $id, int $id_usuario, int $id_espaco, DateTime $data)
     {
         $this->id = $id;
         $this->id_usuario = $id_usuario;

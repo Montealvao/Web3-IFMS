@@ -2,14 +2,14 @@
 
 class Usuario
 {
-    private int $id;
+    private ?int $id;
     private string $nome;
     private string $email;
     private string $senha;
     private string $telefone;
     private string $permissao;
 
-    public function __construct(int $id, string $nome, string $email, string $senha, string $telefone, string $permissao)
+    public function __construct(?int $id, string $nome, string $email, string $senha, string $telefone, string $permissao)
     {
         $this->id = $id;
         $this->nome = $nome;
