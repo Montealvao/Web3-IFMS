@@ -37,7 +37,7 @@ class UsuarioRepositorio
         );
     }
 
-    public function salvar(Usuario $usuario): void    
+    public function salvar(Usuario $usuario): void
     {
         $sql = "INSERT INTO usuarios(nome, email, senha, telefone, permissao) VALUES(?,?,?,?,?)";
         $statement = $this->pdo->prepare(query: $sql);
@@ -48,5 +48,37 @@ class UsuarioRepositorio
         $statement->bindValue(param: 5, value: $usuario->getPermissao());
         $statement->execute();
     }
+
+    public function buscar(Usuario $usuario): object
+    {
+        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $statment = $this->pdo->prepare(query: $sql);
+        $statment->bindValue(param: 1, value: $usuario->getId());
+        $statment->execute();
+
+        $dados = $statment->fetch(mode: PDO::FETCH_ASSOC);
+
+        return $this->formarObjeto(dados: $dados);
+    }
+
+    public function atualizar(Usuario $usuario): void
+    {
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, telefone = ?, permissao = ? WHERE id = ?";
+        $statment = $this->pdo->prepare(query: $sql);
+        $statment->bindValue(param: 1, value: $usuario->getNome());
+        $statment->bindValue(param: 2, value: $usuario->getEmail());
+        $statment->bindValue(param: 3, value: $usuario->getSenha());
+        $statment->bindValue(param: 4, value: $usuario->getTelefone());
+        $statment->bindValue(param: 5, value: $usuario->getPermissao());
+        $statment->bindValue(param: 6, value: $usuario->getId());
+        $statment->execute();
+    }
+
+    public function deletar(Usuario $usuario): void
+    {
+        $sql = "DELETE FROM usuarios WHERE id =  ?";
+        $statment = $this->pdo->prepare(query: $sql);
+        $statment->bindValue(param: 1, value: $usuario->getId());
+        $statment->execute();
+    }
 }
-?>  
