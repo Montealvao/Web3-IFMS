@@ -6,13 +6,15 @@ class Espaco
     private string $nome;
     private int $capacidade;
     private string $descricao;
+    private string $imagem;
 
-    public function __construct(?int $id, string $nome, int $capacidade, string $descricao)
+    public function __construct(?int $id, string $nome, int $capacidade, string $descricao, string $imagem = "")
     {
         $this->id = $id;
         $this->nome = $nome;
         $this->capacidade = $capacidade;
         $this->descricao = $descricao;
+        $this->imagem = $imagem;
     }
 
     public function getId(): int
@@ -33,6 +35,21 @@ class Espaco
     public function getDescricao(): string
     {
         return $this->descricao;
+    }
+
+    public function getImagem(): string
+    {
+        return $this->imagem;
+    }
+
+    public function getImagemDiretorio(): string
+    {
+        return "Src/Content/Uploads" . $this->imagem;
+    }
+
+    public function setImagem(string $imagem): void
+    {
+        $this->imagem = $imagem;
     }
 }
 ?>

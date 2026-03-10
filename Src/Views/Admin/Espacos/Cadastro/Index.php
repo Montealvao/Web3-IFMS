@@ -4,13 +4,18 @@ require_once "Src/DB/Conexao.php";
 require_once "Src/Models/Espaco.php";
 require_once "Src/Repositories/EspacoRepositorio.php";
 
-if (isset($_POST["cadastro"])) {
+if (isset($_POST['cadastro'])) {
     $espaco = new Espaco(
         id: null,
-        nome: $_POST["nome"],
-        capacidade: $_POST["capacidade"],
-        descricao: $_POST["descricao"]
+        nome: $_POST['nome'],
+        capacidade: $_POST['capacidade'],
+        descricao: $_POST['descricao']
     );
+}
+
+if (isset($_FILES['imagem'])){
+    $espaco->setImagem(imagem: uniqid() . $_FILES['imagem']['name']);
+    move_uploaded_file(from: $_FILES['imagem']['temp_name'], to: $espaco->getImagemDiretorio());
 }
 
 $espacoRepositorio = new EspacoRepositorio(pdo: $pdo);
@@ -39,7 +44,7 @@ $espacoRepositorio->salvar(espaco: $espaco);
                 </div>
                 <div class="form-group">
                     <label for="capacidade">Capacidade:</label>
-                    <input type="int" id="capacidade" name="capacidade" required>
+                    <input type="number" id="capacidade" name="capacidade" required>
                 </div>
                 <div class="form-group">
                     <label for="descricao">Descrição:</label>
@@ -47,7 +52,7 @@ $espacoRepositorio->salvar(espaco: $espaco);
                 </div>
                 <div class="">
                     <label for="imagem">Envie uma imagem do espaço</label>
-                    <input type="image" name="imagem" id="imagem" placeholder="Envie uma imagem">
+                    <input type="file" name="imagem" id="imagem" placeholder="Envie uma imagem">
                 </div>
                 <button type="submit" name="cadastro" class="btn">Cadastrar</button>
             </form>

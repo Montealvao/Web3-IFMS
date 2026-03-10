@@ -31,7 +31,8 @@ class EspacoRepositorio
             id: $dados['id'],
             nome: $dados['nome'],
             capacidade: $dados['capacidade'],
-            descricao: $dados['descricao']
+            descricao: $dados['descricao'],
+            imagem: $dados['imagem']
         );
     }
 
@@ -42,6 +43,39 @@ class EspacoRepositorio
         $statment->bindValue(param: 1, value: $espaco->getNome());
         $statment->bindValue(param: 2, value: $espaco->getCapacidade());
         $statment->bindValue(param: 3, value: $espaco->getDescricao());
+        $statment->execute();
+    }
+
+
+    public function buscar(int $id): object
+    {
+        $sql = "SELECT * FROM espacos WHERE id = ?";
+        $statment = $this->pdo->prepare(query: $sql);
+        $statment->bindValue(param:1, value: $id);
+        $statment->execute();
+
+        $dados =  $statment->fetch(mode: PDO::FETCH_ASSOC);
+
+        return $this->formarObjeto(dados: $dados);
+    }
+
+    public function atualizar(Espaco $espaco): void
+    {
+        $sql = "UPDATE espacos SET nome = ?, capacidade = ?, descricao = ?, imagem = ? WHERE id = ?";
+        $statment = $this->pdo->prepare(query: $sql);
+        $statment->bindValue(param: 1, value: $espaco->getNome());
+        $statment->bindValue(param: 2, value: $espaco->getCapacidade());
+        $statment->bindValue(param: 3, value: $espaco->getDescricao());
+        $statment->bindValue(param: 4, value: $espaco->getImagem());
+        $statment->bindValue(param: 5, value: $espaco->getId());
+        $statment->execute();
+    }
+
+    public function deletar(int $id): void
+    {
+        $sql = "DELETE FROM espacos WHERE id = ?";
+        $statment = $this->pdo->prepare(query: $sql);
+        $statment->bindValue(param: 1, value: $id);
         $statment->execute();
     }
 }

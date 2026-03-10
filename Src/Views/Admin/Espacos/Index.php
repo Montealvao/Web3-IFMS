@@ -36,10 +36,17 @@ $espacos = $dadosEspaco->getTodosEspacos();
                 <tbody>
                     <?php foreach ($espacos as $espaco): ?>
                         <tr>
-                            <td data-label='ID:'><?= $espaco->getId() ?></td>
-                            <td data-label='Nome:'><?= $espaco->getNome() ?></td>
-                            <td data-label='Capacidade:'><?= $espaco->getCapacidade() ?></td>
-                            <td data-label='Descrição:'><?= $espaco->getDescricao() ?></td>
+                            <td><?= $espaco->getId() ?></td>
+                            <td><?= $espaco->getNome() ?></td>
+                            <td><?= $espaco->getCapacidade() ?></td>
+                            <td><?= $espaco->getDescricao() ?></td=>
+                            <td><a class="botao-editar" href="./Cadastro/Index.php?id=<?= $espaco->getId() ?>">Editar</a></td>
+                            <td>
+                                <form action="./Excluir/Index.php" method="post">
+                                    <input type="hidden" name="id" value="<?= $espaco->getId() ?>">
+                                    <input type="submit" class="botao-excluir" value="Excluir">
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>
