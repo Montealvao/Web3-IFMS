@@ -1,5 +1,9 @@
 <?php
 
+namespace Web3\MVC\Repositorio;
+use PDO;
+use Web3\MVC\Modelo\Reserva;
+
 class ReservaRepositorio
 {
     private PDO $pdo;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Web3\MVC\Modelo;
+
 class Espaco
 {
     private ?int $id;

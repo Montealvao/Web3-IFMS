@@ -1,31 +1,3 @@
-<?php
-
-require_once "Src/DB/Conexao.php";
-require_once "Src/Models/Espaco.php";
-require_once "Src/Repositories/EspacoRepositorio.php";
-
-$espacoRepositorio = new EspacoRepositorio(pdo: $pdo);
-
-if (isset($_POST['editar'])) {
-    $espaco = new Espaco(
-        id: $_POST['id'],
-        nome: $_POST['nome'],
-        capacidade: $_POST['capacidade'],
-        descricao: $_POST['descricao']
-    );
-
-    if (isset($_FILES['imagem'])) {
-        $espaco->setImagem(imagem: uniqid() . $_FILES['imagem']['name']);
-        move_uploaded_file(from: $_FILES['imagem']['temp_name'], to: $espaco->getImagemDiretorio());
-    }
-
-    $espacoRepositorio->atualizar(espaco: $espaco);
-} else {
-    $espaco = $espacoRepositorio->buscar(id: $_GET['id']);
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 

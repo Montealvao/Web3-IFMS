@@ -1,5 +1,7 @@
 <?php
 
+namespace Web3\MVC\Modelo;
+
 class Usuario
 {
     private ?int $id;

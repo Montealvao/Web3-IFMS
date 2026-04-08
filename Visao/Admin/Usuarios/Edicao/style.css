@@ -1,0 +1,73 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #111827;
+    color: white;
+    height: 100vh;
+    position: relative;
+}
+
+.titulo_edicao {
+    font-size: 20px;
+}
+
+.editarEspaco {
+    width: 100%;
+    height: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.excluirEspaco {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.inputs {
+    width: 20.5rem;
+    height: 2.8rem;
+    display: block;
+    border-radius: 0.5rem;
+    padding-left: 10px;
+
+}
+
+.padding_input {
+    width: 20.5rem;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#editar {
+    height: 2.8rem;
+    width: 10.5rem;
+    border-radius: 0.5rem;
+    background-color: #13C296;
+}
+
+.edit {
+    background-color: #1f2937;
+    height: 35rem;
+    width: 60rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.5rem;
+}
+
+@media (max-width: 768px) {
+
+    .edit {
+        max-width: 25rem;
+    }
+}

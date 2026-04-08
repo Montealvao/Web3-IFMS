@@ -1,5 +1,9 @@
 <?php
 
+namespace Web3\MVC\Repositorio;
+use PDO;
+use Web3\MVC\Modelo\Usuario;
+
 class UsuarioRepositorio
 {
     private PDO $pdo;
@@ -49,11 +53,11 @@ class UsuarioRepositorio
         $statement->execute();
     }
 
-    public function buscar(Usuario $usuario): object
+    public function buscar(int $id): object
     {
         $sql = "SELECT * FROM usuarios WHERE id = ?";
         $statment = $this->pdo->prepare(query: $sql);
-        $statment->bindValue(param: 1, value: $usuario->getId());
+        $statment->bindValue(param: 1, value: $id);
         $statment->execute();
 
         $dados = $statment->fetch(mode: PDO::FETCH_ASSOC);
@@ -74,11 +78,11 @@ class UsuarioRepositorio
         $statment->execute();
     }
 
-    public function deletar(Usuario $usuario): void
+    public function deletar(int $id): void
     {
         $sql = "DELETE FROM usuarios WHERE id =  ?";
         $statment = $this->pdo->prepare(query: $sql);
-        $statment->bindValue(param: 1, value: $usuario->getId());
+        $statment->bindValue(param: 1, value: $id);
         $statment->execute();
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+namespace Web3\MVC\Repositorio;
+use PDO;
+use Web3\MVC\Modelo\Espaco;
+
 class EspacoRepositorio
 {
     private PDO $pdo;
@@ -78,4 +82,5 @@ class EspacoRepositorio
         $statment->bindValue(param: 1, value: $id);
         $statment->execute();
     }
+
 }
